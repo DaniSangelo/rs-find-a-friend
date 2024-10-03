@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "if [ -d src ]; then eslint src --ext .ts --fix; else echo 'src directory does not exist'; fi"
+    "lint:fix": "eslint src --ext .ts --fix",
+    "lint": "eslint src --ext .ts"
   },
   "repository": {
     "type": "git",
