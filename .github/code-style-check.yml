@@ -2,7 +2,7 @@ name: Code Style Check
 
 on:
   push:
-    branches:
+    branches-ignore:
       - main
   pull_request:
     branches-ignore:
