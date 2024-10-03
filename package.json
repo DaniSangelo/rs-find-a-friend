@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "lint": "eslint src --ext .ts --fix"
   },
@@ -19,7 +20,14 @@
   "homepage": "https://github.com/DaniSangelo/rs-find-a-friend#readme",
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.2.2",
+    "@types/node": "^22.7.4",
     "eslint": "^8.57.1",
+    "tsup": "^8.3.0",
+    "tsx": "^4.19.1",
     "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "fastify": "^5.0.0"
   }
 }
