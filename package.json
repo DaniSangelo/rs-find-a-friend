@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "lint:fix": "eslint src --ext .ts --fix",
-    "lint": "eslint src --ext .ts"
+    "lint": "eslint src --ext .ts",
+    "test": "vitest run --dir src/Application/UseCases",
+    "test:watch": "vitest --dir src/Application/UseCases"
   },
   "repository": {
     "type": "git",
