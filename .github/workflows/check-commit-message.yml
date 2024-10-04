@@ -1,0 +1,21 @@
+name: Check Commit Messages
+
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+    branches-ignore:
+      - main
+
+jobs:
+  validate-commit-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Validate commit message format
+        run: |
+          COMMIT_MSG=$(git log --format=%B --no-merges -n 1 ${{ github.sha }})
+          echo "$COMMIT_MSG" | grep -E '^.+#[A-Z]{3}-[0-9]{4}\s*\[[a-zA-Z]+\]$' || (echo "Erro: Formato inválido da mensagem de commit!" && exit 1)
