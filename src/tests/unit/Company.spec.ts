@@ -12,7 +12,7 @@ describe('Create company', () => {
       '5531988360076',
       '123456',
       PasswordTypeEnum.MD5,
-    );
+    )
     expect(company.getEmail()).toEqual('jhonDoe@mail.com')
   })
 
