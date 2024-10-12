@@ -7,8 +7,9 @@
   "scripts": {
     "lint:fix": "eslint src --ext .ts --fix",
     "lint": "eslint src --ext .ts",
-    "test": "vitest run --dir src/Application/UseCases",
-    "test:watch": "vitest --dir src/Application/UseCases"
+    "test:unit": "vitest run --dir src/tests/unit",
+    "test:unit:watch": "vitest --dir src/tests/unit",
+    "test:ui": "vitest --ui"
   },
   "repository": {
     "type": "git",
