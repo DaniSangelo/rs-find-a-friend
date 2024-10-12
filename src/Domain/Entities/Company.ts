@@ -4,6 +4,7 @@ import Email from '../ValueObjects/Email'
 import Name from '../ValueObjects/Name'
 import Password from '../ValueObjects/Password'
 import PhoneNumber from '../ValueObjects/PhoneNumber'
+import crypto from 'node:crypto'
 
 export default class Company {
   private _ownerName: Name
@@ -14,6 +15,7 @@ export default class Company {
   private _password: Password
 
   constructor(
+    readonly id: string,
     ownerName: string,
     email: string,
     CEP: string,
@@ -22,6 +24,7 @@ export default class Company {
     password: string,
     readonly passwordType: PasswordTypeEnum = PasswordTypeEnum.SHA1,
   ) {
+    console.log('chegou aqqui', ownerName)
     this._ownerName = new Name(ownerName)
     this._email = new Email(email)
     this._CEP = CEP
@@ -40,6 +43,7 @@ export default class Company {
     passwordType: PasswordTypeEnum = PasswordTypeEnum.SHA1,
   ) {
     return new Company(
+      crypto.randomUUID(),
       ownerName,
       email,
       CEP,
@@ -71,5 +75,9 @@ export default class Company {
 
   setPhoneNumber(value: string) {
     this._whatsAppNumber = new PhoneNumber(value)
+  }
+
+  verifyPassword(password: string): boolean {
+    return this._password.verify(password)
   }
 }

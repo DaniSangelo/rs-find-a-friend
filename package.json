@@ -7,8 +7,10 @@
   "scripts": {
     "lint:fix": "eslint src --ext .ts --fix",
     "lint": "eslint src --ext .ts",
-    "test:unit": "vitest run --dir src/tests/unit",
-    "test:unit:watch": "vitest --dir src/tests/unit",
+    "test:unit": "vitest run --dir src/Tests/Unit",
+    "test:unit:watch": "vitest --dir src/Tests/Unit",
+    "test:usecase": "vitest run --dir src/Tests/UseCase",
+    "test:usecase:watch": "vitest --dir src/Tests/UseCase",
     "test:ui": "vitest --ui"
   },
   "repository": {

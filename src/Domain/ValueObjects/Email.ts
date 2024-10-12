@@ -16,6 +16,7 @@ export default class Email {
   }
 
   private isValid(email: string) {
-    return /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/.test(email)
+    const regex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/
+    return regex.test(email)
   }
 }
