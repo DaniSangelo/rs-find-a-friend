@@ -18,4 +18,4 @@ jobs:
       - name: Validate commit message format
         run: |
           COMMIT_MSG=$(git log --format=%B --no-merges -n 1 ${{ github.sha }})
-          echo "$COMMIT_MSG" | grep -E '^.+#[A-Z]{3}-[0-9]{4}\s*\[[a-zA-Z]+\]$' || (echo "Erro: Formato inválido da mensagem de commit!" && exit 1)
+          echo "$COMMIT_MSG" | grep -E '^.+#[A-Z]{3}-[0-9]{4}\s*\[(task|bugfix|feature|enhancement)\]$' || (echo "Erro: Commit message has no valid format!" && exit 1)
