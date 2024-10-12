@@ -1,0 +1,41 @@
+name: Check Multiple Commit Messages
+
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+    branches-ignore:
+      - main
+
+jobs:
+  validate-multiple-commit-messages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Validate multiple commit messages format
+        run: |
+          # Catch all commit messages in the push interval
+          COMMIT_MESSAGES=$(git log --format=%B --no-merges ${{ github.event.before }}..${{ github.sha }})
+
+          # Set the commit message pattern expected
+          PATTERN='^.+#[A-Z]{3}-[0-9]{4}\s*\[(bugfix|task|feature|enhancement)\]$'
+
+          # Initialize a variable to track invalid commits
+          INVALID_COMMITS=""
+
+          # Iterates through each commit message and check the pattern
+          while IFS= read -r COMMIT_MSG; do
+            if [[ ! $COMMIT_MSG =~ $PATTERN ]]; then
+              INVALID_COMMITS="${INVALID_COMMITS}\n${COMMIT_MSG}"
+            fi
+          done <<< "$COMMIT_MESSAGES"
+
+          # If there are invalid commits, show an error and the action fails
+          if [ -n "$INVALID_COMMITS" ]; then
+            echo -e "Erro: The following commit messages are outside of the expected pattern:"
+            echo -e "$INVALID_COMMITS"
+            exit 1
+          fi
