@@ -1,4 +1,4 @@
-import { PasswordType } from '../Enums/PasswordTypeEnum'
+import { PasswordTypeEnum } from '../Enums/PasswordTypeEnum'
 import {
   PasswordPlain,
   PasswordMd5,
@@ -6,13 +6,13 @@ import {
 } from '../ValueObjects/Password'
 
 export default class PasswordFactory {
-  static create(password: string, type: PasswordType) {
+  static create(password: string, type: PasswordTypeEnum) {
     switch (type) {
-      case PasswordType.PLAIN:
+      case PasswordTypeEnum.PLAIN:
         return new PasswordPlain(password)
-      case PasswordType.MD5:
+      case PasswordTypeEnum.MD5:
         return new PasswordMd5(password)
-      case PasswordType.SHA1:
+      case PasswordTypeEnum.SHA1:
         return new PasswordSha1(password)
       default:
         throw new Error('Password type not implemented')

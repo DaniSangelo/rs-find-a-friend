@@ -1,4 +1,4 @@
-export enum PasswordType {
+export enum PasswordTypeEnum {
   PLAIN = 'plain',
   MD5 = 'md5',
   SHA1 = 'sha1',
