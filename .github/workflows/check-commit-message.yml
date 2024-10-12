@@ -15,9 +15,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       
-      - name: Validate commit message format
+      - name: Validate most recent commit message format
         run: |
-          INVALID_COMMITS=$(git log --format=%B --no-merges ${{ github.event.before }}..${{ github.sha }} | grep -vE '^.+#[A-Z]{3}-[0-9]{4}\s*\[(bugfix|task|feature)\]$' || true)
+          INVALID_COMMITS=$(git log --format=%B --no-merges ${{ github.event.before }}..${{ github.sha }} | grep -vE '^.+#[A-Z]{3}-[0-9]{4}\s*\[(bugfix|task|feature|enhancement)\]$' || true)
           if [ -n "$INVALID_COMMITS" ]; then
             echo "Erro: The following commits do not follow the expected pattern:"
             echo "$INVALID_COMMITS"

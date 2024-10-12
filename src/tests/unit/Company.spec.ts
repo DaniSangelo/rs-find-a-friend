@@ -14,13 +14,14 @@ describe('Create company', () => {
       PasswordTypeEnum.MD5,
     )
     expect(company.getEmail()).toEqual('jhonDoe@mail.com')
+    expect(company.verifyPassword('123456')).toBe(true)
   })
 
   it('Should not be possible to create a company with an invalid email', () => {
     expect(() => {
-      return new Company(
+      return Company.create(
         'Jhon Doe',
-        'jhonDoe@mail',
+        'jhondoe@mail',
         '6466564',
         '5th avenue, 543',
         '5531988360076',
@@ -32,9 +33,9 @@ describe('Create company', () => {
 
   it('Should not be possible to create a company with a name with less than 3 characters', () => {
     expect(() => {
-      return new Company(
+      return Company.create(
         'Jo',
-        'XXXXXXXXXXXXXXXX',
+        'jhonDoe@mail.com',
         '6466564',
         '5th avenue, 543',
         '5531988360076',
@@ -46,7 +47,7 @@ describe('Create company', () => {
 
   it('Should not be able to create a company with an invalid phone number', () => {
     expect(() => {
-      return new Company(
+      return Company.create(
         'Jhon Doe',
         'jhondoe@mail.com',
         '6466',
