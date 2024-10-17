@@ -10,4 +10,8 @@ export default class PhoneNumber {
     const regex = /^\d{10,18}$/
     return regex.test(value)
   }
+
+  get() {
+    return this._value
+  }
 }

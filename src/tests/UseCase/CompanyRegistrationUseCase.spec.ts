@@ -15,11 +15,10 @@ beforeEach(() => {
 describe('Company registration use case', () => {
   it('Should can register a new company', async () => {
     const company = await companyRegistrationUseCase.execute({
+      name: 'Mark I',
       ownerName: 'Mark I',
       email: 'mark.1@mail.com',
-      CEP: '465456456',
-      address: 'Avenue 5th, 1234',
-      whatsAppNumber: '12345678910',
+      whatsapp: '12345678910',
       password: '123456',
     })
     expect(company).toHaveProperty('id')
