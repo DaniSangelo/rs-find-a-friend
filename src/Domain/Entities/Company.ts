@@ -1,5 +1,6 @@
 import { PasswordTypeEnum } from '../Enums/PasswordTypeEnum'
 import PasswordFactory from '../Factories/PasswordFactory'
+import Address from '../ValueObjects/Address'
 import Email from '../ValueObjects/Email'
 import Name from '../ValueObjects/Name'
 import Password from '../ValueObjects/Password'
@@ -7,77 +8,88 @@ import PhoneNumber from '../ValueObjects/PhoneNumber'
 import crypto from 'node:crypto'
 
 export default class Company {
-  private _ownerName: Name
-  private _email: Email
-  private _CEP: string
-  private _address: string
-  private _whatsAppNumber: PhoneNumber
-  private _password: Password
+  private name: Name
+  private ownerName: Name
+  private email: Email
+  private whatsapp: PhoneNumber
+  private password: Password
+  private address: Address
 
   constructor(
     readonly id: string,
+    name: string,
     ownerName: string,
     email: string,
-    CEP: string,
-    address: string,
-    whatsAppNumber: string,
+    whatsapp: string,
     password: string,
+    address: Address,
     readonly passwordType: PasswordTypeEnum = PasswordTypeEnum.SHA1,
   ) {
-    console.log('chegou aqqui', ownerName)
-    this._ownerName = new Name(ownerName)
-    this._email = new Email(email)
-    this._CEP = CEP
-    this._address = address
-    this._whatsAppNumber = new PhoneNumber(whatsAppNumber)
-    this._password = PasswordFactory.create(password, passwordType)
+    this.name = new Name(name)
+    this.ownerName = new Name(ownerName)
+    this.email = new Email(email)
+    this.whatsapp = new PhoneNumber(whatsapp)
+    this.password = PasswordFactory.create(password, passwordType)
+    this.address = address
   }
 
   static create(
+    name: string,
     ownerName: string,
     email: string,
-    CEP: string,
-    address: string,
-    whatsAppNumber: string,
+    whatsapp: string,
     password: string,
+    address: Address,
     passwordType: PasswordTypeEnum = PasswordTypeEnum.SHA1,
   ) {
     return new Company(
       crypto.randomUUID(),
+      name,
       ownerName,
       email,
-      CEP,
-      address,
-      whatsAppNumber,
+      whatsapp,
       password,
+      address,
       passwordType,
     )
   }
 
   getEmail() {
-    return this._email.get()
+    return this.email.get()
   }
 
   getName() {
-    return this._ownerName.get()
+    return this.name.get()
+  }
+
+  getOwnerName() {
+    return this.ownerName.get()
   }
 
   setEmail(email: string) {
-    this._email = new Email(email)
+    this.email = new Email(email)
   }
 
   setPassword(
     password: string,
     passwordType: PasswordTypeEnum = PasswordTypeEnum.SHA1,
   ) {
-    this._password = PasswordFactory.create(password, passwordType)
+    this.password = PasswordFactory.create(password, passwordType)
   }
 
-  setPhoneNumber(value: string) {
-    this._whatsAppNumber = new PhoneNumber(value)
+  setWhatsApp(value: string) {
+    this.whatsapp = new PhoneNumber(value)
+  }
+
+  getWhatsApp() {
+    return this.whatsapp.get()
   }
 
   verifyPassword(password: string): boolean {
-    return this._password.verify(password)
+    return this.password.verify(password)
+  }
+
+  getAddress() {
+    return this.address
   }
 }
