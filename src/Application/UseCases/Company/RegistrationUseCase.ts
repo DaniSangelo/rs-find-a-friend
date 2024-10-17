@@ -1,4 +1,4 @@
-import ICompanyRegistrationRepository from 'src/Infrastructure/Repository/ICompanyRegistrationRepository'
+import ICompanyRepository from 'src/Infrastructure/Repository/ICompanyRepository'
 import IUseCase from '../IUseCase'
 import Company from 'src/Domain/Entities/Company'
 import Address from 'src/Domain/ValueObjects/Address'
@@ -13,10 +13,10 @@ type CompanyInputDTO = {
 }
 
 export default class RegistrationUseCase implements IUseCase {
-  companyRegistrationRepository: ICompanyRegistrationRepository
+  companyRepository: ICompanyRepository
 
-  constructor(companyRegistrationRepository: ICompanyRegistrationRepository) {
-    this.companyRegistrationRepository = companyRegistrationRepository
+  constructor(companyRepository: ICompanyRepository) {
+    this.companyRepository = companyRepository
   }
 
   async execute(data: CompanyInputDTO): Promise<Company> {
@@ -28,6 +28,6 @@ export default class RegistrationUseCase implements IUseCase {
       data.password,
       data.address,
     )
-    return await this.companyRegistrationRepository.save(company)
+    return await this.companyRepository.save(company)
   }
 }

@@ -1,5 +1,5 @@
 import Company from 'src/Domain/Entities/Company'
 
-export default interface ICompanyRegistrationRepository {
+export default interface ICompanyRepository {
   save(company: Company): Promise<Company>
 }

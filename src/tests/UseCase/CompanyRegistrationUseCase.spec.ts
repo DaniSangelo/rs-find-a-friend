@@ -1,17 +1,15 @@
 import RegistrationUseCase from 'src/Application/UseCases/Company/RegistrationUseCase'
 import Address from 'src/Domain/ValueObjects/Address'
 import Coordinates from 'src/Domain/ValueObjects/Coordinates'
-import CompanyRegistrationInMemoryRepository from 'src/Infrastructure/Repository/InMemory/CompanyRegistrationInMemoryRepository'
+import InMemoryCompanyRepository from 'src/Infrastructure/Repository/InMemory/InMemoryCompanyRepository'
 import { beforeEach, describe, expect, it } from 'vitest'
 
-let companyRegistrationRepository: CompanyRegistrationInMemoryRepository
+let companyRepository: InMemoryCompanyRepository
 let companyRegistrationUseCase: RegistrationUseCase
 
 beforeEach(() => {
-  companyRegistrationRepository = new CompanyRegistrationInMemoryRepository()
-  companyRegistrationUseCase = new RegistrationUseCase(
-    companyRegistrationRepository,
-  )
+  companyRepository = new InMemoryCompanyRepository()
+  companyRegistrationUseCase = new RegistrationUseCase(companyRepository)
 })
 
 describe('Company registration use case', () => {
