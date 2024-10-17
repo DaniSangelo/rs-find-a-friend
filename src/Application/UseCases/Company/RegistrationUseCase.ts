@@ -1,6 +1,7 @@
 import ICompanyRegistrationRepository from 'src/Infrastructure/Repository/ICompanyRegistrationRepository'
 import IUseCase from '../IUseCase'
 import Company from 'src/Domain/Entities/Company'
+import Address from 'src/Domain/ValueObjects/Address'
 
 type CompanyInputDTO = {
   name: string
@@ -8,6 +9,7 @@ type CompanyInputDTO = {
   email: string
   whatsapp: string
   password: string
+  address: Address
 }
 
 export default class RegistrationUseCase implements IUseCase {
@@ -24,6 +26,7 @@ export default class RegistrationUseCase implements IUseCase {
       data.email,
       data.whatsapp,
       data.password,
+      data.address,
     )
     return await this.companyRegistrationRepository.save(company)
   }
