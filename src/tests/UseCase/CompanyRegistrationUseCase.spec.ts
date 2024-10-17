@@ -32,4 +32,56 @@ describe('Company registration use case', () => {
     })
     expect(company).toHaveProperty('id')
   })
+
+  it('Should be able to find a company by email', async () => {
+    const address = new Address(
+      '30514050',
+      'MG',
+      'BH',
+      'Betânia',
+      'Rua das Flores',
+      new Coordinates(40.7128, -74.006),
+    )
+    const company = await companyRegistrationUseCase.execute({
+      name: 'Mark I',
+      ownerName: 'Mark I',
+      email: 'mark.1@mail.com',
+      whatsapp: '12345678910',
+      password: '123456',
+      address,
+    })
+    const foundCompany = await companyRepository.findByEmail('mark.1@mail.com')
+    expect(company.getEmail()).toEqual(foundCompany?.getEmail())
+    expect(foundCompany).toHaveProperty('id')
+  })
+
+  // it('Should not be able to register an email twice', async () => {
+  //   const address = new Address(
+  //     '30514050',
+  //     'MG',
+  //     'BH',
+  //     'Betânia',
+  //     'Rua das Flores',
+  //     new Coordinates(40.7128, -74.006),
+  //   )
+  //   const company = await companyRegistrationUseCase.execute({
+  //     name: 'Mark I',
+  //     ownerName: 'Mark I',
+  //     email: 'mark.1@mail.com',
+  //     whatsapp: '12345678910',
+  //     password: '123456',
+  //     address,
+  //   })
+
+  //   await expect(() =>
+  //     companyRegistrationUseCase.execute({
+  //       name: 'Mark II',
+  //       ownerName: 'Mark II',
+  //       email: 'mark.1@mail.com',
+  //       whatsapp: '12345678910',
+  //       password: '123456',
+  //       address,
+  //     }),
+  //   ).rejects.toThrowError('Email already registered')
+  // })
 })

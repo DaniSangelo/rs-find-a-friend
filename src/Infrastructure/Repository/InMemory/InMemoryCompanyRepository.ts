@@ -8,4 +8,11 @@ export default class InMemoryCompanyRepository implements ICompanyRepository {
     this.companies.push(company)
     return company
   }
+
+  async findByEmail(email: string): Promise<Company | null> {
+    const company = this.companies.find(
+      (company) => company.getEmail() === email,
+    )
+    return company || null
+  }
 }
