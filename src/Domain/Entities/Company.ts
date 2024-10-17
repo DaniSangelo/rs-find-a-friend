@@ -1,5 +1,6 @@
 import { PasswordTypeEnum } from '../Enums/PasswordTypeEnum'
 import PasswordFactory from '../Factories/PasswordFactory'
+import Address from '../ValueObjects/Address'
 import Email from '../ValueObjects/Email'
 import Name from '../ValueObjects/Name'
 import Password from '../ValueObjects/Password'
@@ -12,6 +13,7 @@ export default class Company {
   private email: Email
   private whatsapp: PhoneNumber
   private password: Password
+  private address: Address
 
   constructor(
     readonly id: string,
@@ -20,6 +22,7 @@ export default class Company {
     email: string,
     whatsapp: string,
     password: string,
+    address: Address,
     readonly passwordType: PasswordTypeEnum = PasswordTypeEnum.SHA1,
   ) {
     this.name = new Name(name)
@@ -27,6 +30,7 @@ export default class Company {
     this.email = new Email(email)
     this.whatsapp = new PhoneNumber(whatsapp)
     this.password = PasswordFactory.create(password, passwordType)
+    this.address = address
   }
 
   static create(
@@ -35,6 +39,7 @@ export default class Company {
     email: string,
     whatsapp: string,
     password: string,
+    address: Address,
     passwordType: PasswordTypeEnum = PasswordTypeEnum.SHA1,
   ) {
     return new Company(
@@ -44,6 +49,7 @@ export default class Company {
       email,
       whatsapp,
       password,
+      address,
       passwordType,
     )
   }
@@ -81,5 +87,9 @@ export default class Company {
 
   verifyPassword(password: string): boolean {
     return this.password.verify(password)
+  }
+
+  getAddress() {
+    return this.address
   }
 }

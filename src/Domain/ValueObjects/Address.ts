@@ -4,7 +4,7 @@ export default class Address {
   #zipCode: string
   #state: string
   #city: string
-  #neighborhood: number
+  #neighborhood: string
   #street: string
   #coordinates: Coordinates
 
@@ -12,7 +12,7 @@ export default class Address {
     zipCode: string,
     state: string,
     city: string,
-    neighborhood: number,
+    neighborhood: string,
     street: string,
     coordinates: Coordinates,
   ) {
