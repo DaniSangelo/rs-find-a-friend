@@ -88,7 +88,7 @@ describe('Create company', () => {
     }).toThrow(new Error('Invalid phone number'))
   })
 
-  it.only('Should not be able to create a company with an invalid latitude', () => {
+  it('Should not be able to create a company with an invalid latitude', () => {
     expect(() => {
       return new Address(
         '30514030',
@@ -109,7 +109,7 @@ describe('Create company', () => {
         'Belo Horizonte',
         'Betânia',
         'Rua das Flores',
-        new Coordinates(-40.7128, -174.006),
+        new Coordinates(-40.7128, 200),
       )
     }).toThrow(new Error('Invalid longitude value'))
   })
