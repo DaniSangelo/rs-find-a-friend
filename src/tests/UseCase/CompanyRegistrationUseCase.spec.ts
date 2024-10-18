@@ -64,7 +64,7 @@ describe('Company registration use case', () => {
       'Rua das Flores',
       new Coordinates(40.7128, -74.006),
     )
-    const company = await companyRegistrationUseCase.execute({
+    await companyRegistrationUseCase.execute({
       name: 'Mark I',
       ownerName: 'Mark I',
       email: 'mark.1@mail.com',
