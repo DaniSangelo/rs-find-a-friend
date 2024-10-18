@@ -20,6 +20,8 @@ export default class RegistrationUseCase implements IUseCase {
   }
 
   async execute(data: CompanyInputDTO): Promise<Company> {
+    const emailExists = await this.companyRepository.findByEmail(data.email)
+    if (emailExists) throw new Error('Email already exists')
     const company = Company.create(
       data.name,
       data.ownerName,
