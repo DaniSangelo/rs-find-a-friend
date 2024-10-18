@@ -1,21 +1,20 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import Company from '../../Domain/Entities/Company'
+import Company, { CompanyAddressDTO } from '../../Domain/Entities/Company'
 import { PasswordTypeEnum } from '../../Domain/Enums/PasswordTypeEnum'
-import Address from 'src/Domain/ValueObjects/Address'
-import Coordinates from 'src/Domain/ValueObjects/Coordinates'
 
-let address: Address
+let address: CompanyAddressDTO
 
 describe('Create company', () => {
   beforeEach(() => {
-    address = new Address(
-      '30514030',
-      'Minas Gerais',
-      'Belo Horizonte',
-      'Betânia',
-      'Rua das Flores',
-      new Coordinates(40.7128, -74.006),
-    )
+    address = {
+      zipCode: '30514030',
+      state: 'Minas Gerais',
+      city: 'Belo Horizonte',
+      neighborhood: 'Betânia',
+      street: 'Rua das Flores',
+      latitude: 40.7128,
+      longitude: -74.006,
+    }
   })
 
   it('Should be able to create a company', () => {
@@ -89,27 +88,47 @@ describe('Create company', () => {
   })
 
   it('Should not be able to create a company with an invalid latitude', () => {
+    const invalidAddress: CompanyAddressDTO = {
+      zipCode: '30514030',
+      state: 'Minas Gerais',
+      city: 'Belo Horizonte',
+      neighborhood: 'Betânia',
+      street: 'Rua das Flores',
+      latitude: -140.7128,
+      longitude: -74.006,
+    }
+
     expect(() => {
-      return new Address(
-        '30514030',
-        'Minas Gerais',
-        'Belo Horizonte',
-        'Betânia',
-        'Rua das Flores',
-        new Coordinates(-140.7128, -74.006),
+      Company.create(
+        'Jhon Doe LTDA',
+        'Jhon Doe',
+        'jhonDoe@mail.com',
+        '6466564458',
+        '123456',
+        invalidAddress,
       )
     }).toThrow(new Error('Invalid latitude value'))
   })
 
   it('Should not be able to create a company with an invalid longitude', () => {
+    const invalidAddress: CompanyAddressDTO = {
+      zipCode: '30514030',
+      state: 'Minas Gerais',
+      city: 'Belo Horizonte',
+      neighborhood: 'Betânia',
+      street: 'Rua das Flores',
+      latitude: -40.7128,
+      longitude: 200,
+    }
+
     expect(() => {
-      return new Address(
-        '30514030',
-        'Minas Gerais',
-        'Belo Horizonte',
-        'Betânia',
-        'Rua das Flores',
-        new Coordinates(-40.7128, 200),
+      Company.create(
+        'Jhon Doe LTDA',
+        'Jhon Doe',
+        'jhonDoe@mail.com',
+        '6466564458',
+        '123456',
+        invalidAddress,
       )
     }).toThrow(new Error('Invalid longitude value'))
   })

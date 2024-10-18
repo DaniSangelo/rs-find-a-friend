@@ -14,14 +14,15 @@ export default class Address {
     city: string,
     neighborhood: string,
     street: string,
-    coordinates: Coordinates,
+    latitude: number,
+    longitude: number,
   ) {
     this.#zipCode = zipCode
     this.#state = state
     this.#city = city
     this.#neighborhood = neighborhood
     this.#street = street
-    this.#coordinates = coordinates
+    this.#coordinates = new Coordinates(latitude, longitude)
   }
 
   getZipCode() {

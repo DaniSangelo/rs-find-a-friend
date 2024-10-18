@@ -1,7 +1,6 @@
 import ICompanyRepository from 'src/Infrastructure/Repository/ICompanyRepository'
 import IUseCase from '../IUseCase'
-import Company from 'src/Domain/Entities/Company'
-import Address from 'src/Domain/ValueObjects/Address'
+import Company, { CompanyAddressDTO } from 'src/Domain/Entities/Company'
 
 type CompanyInputDTO = {
   name: string
@@ -9,7 +8,7 @@ type CompanyInputDTO = {
   email: string
   whatsapp: string
   password: string
-  address: Address
+  address: CompanyAddressDTO
 }
 
 export default class RegistrationUseCase implements IUseCase {
