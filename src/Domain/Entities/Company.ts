@@ -7,6 +7,16 @@ import Password from '../ValueObjects/Password'
 import PhoneNumber from '../ValueObjects/PhoneNumber'
 import crypto from 'node:crypto'
 
+export interface CompanyAddressDTO {
+  zipCode: string
+  state: string
+  city: string
+  neighborhood: string
+  street: string
+  latitude: number
+  longitude: number
+}
+
 export default class Company {
   private name: Name
   private ownerName: Name
@@ -22,7 +32,7 @@ export default class Company {
     email: string,
     whatsapp: string,
     password: string,
-    address: Address,
+    addressData: CompanyAddressDTO,
     readonly passwordType: PasswordTypeEnum = PasswordTypeEnum.SHA1,
   ) {
     this.name = new Name(name)
@@ -30,7 +40,15 @@ export default class Company {
     this.email = new Email(email)
     this.whatsapp = new PhoneNumber(whatsapp)
     this.password = PasswordFactory.create(password, passwordType)
-    this.address = address
+    this.address = new Address(
+      addressData.zipCode,
+      addressData.state,
+      addressData.city,
+      addressData.neighborhood,
+      addressData.street,
+      addressData.latitude,
+      addressData.longitude,
+    )
   }
 
   static create(
@@ -39,7 +57,7 @@ export default class Company {
     email: string,
     whatsapp: string,
     password: string,
-    address: Address,
+    address: CompanyAddressDTO,
     passwordType: PasswordTypeEnum = PasswordTypeEnum.SHA1,
   ) {
     return new Company(
