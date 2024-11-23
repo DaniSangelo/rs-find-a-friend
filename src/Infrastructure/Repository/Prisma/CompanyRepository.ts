@@ -5,6 +5,20 @@ import { Company as CompanyTable } from '@prisma/client'
 
 export class CompanyRepository implements ICompanyRepository {
   async save(company: Company): Promise<Company> {
+    const address = company.getAddress()
+      ? {
+          create: {
+            zipCode: company.getAddress()?.getZipCode(),
+            state: company.getAddress()?.getState(),
+            city: company.getAddress()?.getCity(),
+            neighborhood: company.getAddress()?.getNeighborhood(),
+            street: company.getAddress()?.getStreet(),
+            latitude: company.getAddress()?.getCoordinates().getLatitude(),
+            longitude: company.getAddress()?.getCoordinates().getLongitude(),
+          },
+        }
+      : undefined
+
     await prisma.company.create({
       data: {
         name: company.getName(),
@@ -12,17 +26,7 @@ export class CompanyRepository implements ICompanyRepository {
         email: company.getEmail(),
         whatsapp: company.getWhatsApp(),
         password: company.getPassword(),
-        // address: {
-        //   create: {
-        //     zipCode: company.address.zipCode,
-        //     state: company.address.state,
-        //     city: company.address.city,
-        //     neighborhood: company.address.neighborhood,
-        //     street: company.address.street,
-        //     latitude: company.address.latitude,
-        //     longitude: company.address.longitude,
-        //   },
-        // },
+        address,
       },
     })
     return company
