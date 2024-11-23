@@ -23,7 +23,7 @@ export default class Company {
   private email: Email
   private whatsapp: PhoneNumber
   private password: Password
-  private address: Address
+  private address?: Address
 
   constructor(
     readonly id: string,
@@ -32,7 +32,7 @@ export default class Company {
     email: string,
     whatsapp: string,
     password: string,
-    addressData: CompanyAddressDTO,
+    addressData?: CompanyAddressDTO,
     readonly passwordType: PasswordTypeEnum = PasswordTypeEnum.SHA1,
   ) {
     this.name = new Name(name)
@@ -40,15 +40,17 @@ export default class Company {
     this.email = new Email(email)
     this.whatsapp = new PhoneNumber(whatsapp)
     this.password = PasswordFactory.create(password, passwordType)
-    this.address = new Address(
-      addressData.zipCode,
-      addressData.state,
-      addressData.city,
-      addressData.neighborhood,
-      addressData.street,
-      addressData.latitude,
-      addressData.longitude,
-    )
+    if (addressData) {
+      this.address = new Address(
+        addressData.zipCode,
+        addressData.state,
+        addressData.city,
+        addressData.neighborhood,
+        addressData.street,
+        addressData.latitude,
+        addressData.longitude,
+      )
+    }
   }
 
   static create(
@@ -57,7 +59,7 @@ export default class Company {
     email: string,
     whatsapp: string,
     password: string,
-    address: CompanyAddressDTO,
+    address?: CompanyAddressDTO,
     passwordType: PasswordTypeEnum = PasswordTypeEnum.SHA1,
   ) {
     return new Company(
@@ -93,6 +95,10 @@ export default class Company {
     passwordType: PasswordTypeEnum = PasswordTypeEnum.SHA1,
   ) {
     this.password = PasswordFactory.create(password, passwordType)
+  }
+
+  getPassword() {
+    return this.password.value
   }
 
   setWhatsApp(value: string) {

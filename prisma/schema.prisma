@@ -15,7 +15,7 @@ model Company {
   whatsapp  String
   password  String
 
-  // cep          String
+  // zipCode          String
   // state        String
   // city         String
   // neighborhood String

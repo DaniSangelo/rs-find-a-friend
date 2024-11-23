@@ -11,7 +11,10 @@
     "test:unit:watch": "vitest --dir src/Tests/Unit",
     "test:usecase": "vitest run --dir src/Tests/UseCase",
     "test:usecase:watch": "vitest --dir src/Tests/UseCase",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "start:dev": "tsx watch ./src/server.ts",
+    "test:coverage": "vitest run --coverage",
+    "start": "tsx ./src/server.ts"
   },
   "repository": {
     "type": "git",
@@ -26,7 +29,9 @@
   "homepage": "https://github.com/DaniSangelo/rs-find-a-friend#readme",
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.2.2",
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^22.7.6",
+    "@vitest/coverage-v8": "^2.1.2",
     "eslint": "^8.57.1",
     "prisma": "^5.21.1",
     "ts-node": "^10.9.2",
@@ -38,9 +43,11 @@
     "@prisma/client": "^5.21.1",
     "@types/supertest": "^6.0.2",
     "@vitest/ui": "^2.1.2",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
     "fastify": "^5.0.0",
     "supertest": "^7.0.0",
-    "vitest": "^2.1.2"
+    "vitest": "^2.1.2",
+    "zod": "^3.23.8"
   }
 }
