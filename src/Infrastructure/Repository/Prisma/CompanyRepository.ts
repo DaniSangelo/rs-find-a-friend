@@ -29,7 +29,7 @@ export class CompanyRepository implements ICompanyRepository {
   }
 
   async findByEmail(email: string): Promise<CompanyTable | null> {
-    const company = await prisma.company.findUnique({ where: { email } });
+    const company = await prisma.company.findUnique({ where: { email } })
     return company
   }
 }

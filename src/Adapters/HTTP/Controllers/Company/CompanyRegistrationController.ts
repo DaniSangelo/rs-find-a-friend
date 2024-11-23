@@ -32,8 +32,9 @@ export async function CompanyRegistrationController(
   const companyRegistrationUseCase = new RegistrationUseCase(
     new CompanyRepository(),
   )
+  const body = bodySchema.parse(request.body)
   try {
-    await companyRegistrationUseCase.execute(request.body as CompanyInputDTO)
+    await companyRegistrationUseCase.execute(body as CompanyInputDTO)
     return reply.status(201).send()
   } catch (error) {
     if (error instanceof UserAlreadyExistsException) {
