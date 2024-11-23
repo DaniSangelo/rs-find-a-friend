@@ -15,4 +15,8 @@ export default class InMemoryCompanyRepository implements ICompanyRepository {
     )
     return company || null
   }
+
+  async findById(id: string): Promise<Company | null> {
+    return this.companies.find((company) => company.id === id) || null
+  }
 }
