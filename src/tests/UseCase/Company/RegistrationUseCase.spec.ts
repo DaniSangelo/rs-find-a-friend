@@ -1,4 +1,5 @@
 import RegistrationUseCase from 'src/Application/UseCases/Company/RegistrationUseCase'
+import { UserAlreadyExistsException } from 'src/Application/UseCases/Exceptions/UserAlreadyExistsException'
 import { CompanyAddressDTO } from 'src/Domain/Entities/Company'
 import InMemoryCompanyRepository from 'src/Infrastructure/Repository/InMemory/InMemoryCompanyRepository'
 import { beforeEach, describe, expect, it } from 'vitest'
@@ -57,7 +58,7 @@ describe('Company registration use case', () => {
       password: '123456',
       address,
     })
-    await expect(
+    await expect(() =>
       companyRegistrationUseCase.execute({
         name: 'Mark I',
         ownerName: 'Mark I',
@@ -66,6 +67,6 @@ describe('Company registration use case', () => {
         password: '123456',
         address,
       }),
-    ).rejects.toThrowError('Email already exists')
+    ).rejects.toThrowError(new UserAlreadyExistsException())
   })
 })
