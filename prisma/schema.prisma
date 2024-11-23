@@ -8,25 +8,32 @@ datasource db {
 }
 
 model Company {
-  id        String @id @default(uuid())
-  name      String
-  ownerName String
-  email     String @unique
-  whatsapp  String
-  password  String
-
-  // zipCode          String
-  // state        String
-  // city         String
-  // neighborhood String
-  // street       String
-
-  // latitude  Decimal
-  // longitude Decimal
-
+  id         String  @id @default(uuid())
+  name       String
+  ownerName  String
+  email      String  @unique
+  whatsapp   String
+  password   String
+  address_id String? @unique
+  address    Address? @relation(fields: [address_id], references: [id])
   // pets Pet[]
 
   @@map("companies")
+}
+
+model Address {
+  id           String @id @default(uuid())
+  zipCode      String
+  state        String
+  city         String
+  neighborhood String
+  street       String
+
+  latitude   Decimal
+  longitude  Decimal
+  Company    Company?
+
+  @@map("address")
 }
 
 // model Pet {
