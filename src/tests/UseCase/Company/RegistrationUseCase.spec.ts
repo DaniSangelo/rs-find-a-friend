@@ -23,7 +23,7 @@ beforeEach(() => {
 })
 
 describe('Company registration use case', () => {
-  it('Should can register a new company', async () => {
+  it('Should be able to register a new company', async () => {
     const company = await companyRegistrationUseCase.execute({
       name: 'Mark I',
       ownerName: 'Mark I',
