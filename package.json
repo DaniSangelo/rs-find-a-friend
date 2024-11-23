@@ -12,9 +12,9 @@
     "test:usecase": "vitest run --dir src/Tests/UseCase",
     "test:usecase:watch": "vitest --dir src/Tests/UseCase",
     "test:ui": "vitest --ui",
-    "start:dev": "tsx watch ./src/server.ts",
+    "start:dev": "tsx watch ./src/main.ts",
     "test:coverage": "vitest run --coverage",
-    "start": "tsx ./src/server.ts"
+    "start": "tsx ./src/main.ts"
   },
   "repository": {
     "type": "git",
