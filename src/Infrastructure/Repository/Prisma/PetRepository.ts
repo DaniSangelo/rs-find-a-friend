@@ -13,7 +13,7 @@ export class PetRepository implements IPetRepository {
         size: pet.getSize(),
         energy_level: pet.getEnergyLevel(),
         environment: pet.getEnvironment(),
-        company_id: pet.getCompany().getId()
+        company_id: pet.getCompany().getId(),
       },
     })
     return pet

@@ -37,7 +37,7 @@ describe('Pet registration use case', () => {
       address,
     )
     await companyRepository.save(company)
-    const pet = await petRegistrationUseCase.execute({
+    await petRegistrationUseCase.execute({
       name: 'Rex',
       about: 'Rex is a sweet dog and he likes to play a lot outdoor',
       age: '6',

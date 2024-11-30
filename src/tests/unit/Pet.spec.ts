@@ -87,7 +87,7 @@ describe('Create pet', () => {
         '1',
         '4',
         'house',
-        company
+        company,
       )
     }).toThrow(new Error('Name cannot be empty'))
   })
