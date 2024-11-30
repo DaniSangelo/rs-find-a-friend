@@ -116,4 +116,8 @@ export default class Company {
   getAddress() {
     return this.address
   }
+
+  getId() {
+    return this.id
+  }
 }

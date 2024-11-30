@@ -37,8 +37,17 @@ export class CompanyRepository implements ICompanyRepository {
     return company
   }
 
-  async findById(id: string): Promise<CompanyTable | null> {
-    const company = await prisma.company.findUnique({ where: { id } })
-    return company
+  async findById(id: string): Promise<Company | null> {
+    const dbCompany = await prisma.company.findUnique({ where: { id } })
+    return !dbCompany
+      ? null
+      : new Company(
+          dbCompany.id,
+          dbCompany?.name,
+          dbCompany?.ownerName,
+          dbCompany?.email,
+          dbCompany?.whatsapp,
+          dbCompany?.password,
+        )
   }
 }

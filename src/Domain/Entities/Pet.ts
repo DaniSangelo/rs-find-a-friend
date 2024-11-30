@@ -1,4 +1,5 @@
 import crypto from 'node:crypto'
+import Company from './Company'
 
 export default class Pet {
   #name: string
@@ -7,6 +8,7 @@ export default class Pet {
   #size: string
   #energyLevel: string
   #environment: string
+  #company: Company
 
   constructor(
     readonly id: string,
@@ -16,6 +18,7 @@ export default class Pet {
     size: string,
     energyLevel: string,
     environment: string,
+    company: Company,
   ) {
     this.validateName(name)
     this.#name = name
@@ -24,6 +27,8 @@ export default class Pet {
     this.#size = size
     this.#energyLevel = energyLevel
     this.#environment = environment
+    this.validateCompany(company)
+    this.#company = company
   }
 
   static create(
@@ -33,6 +38,7 @@ export default class Pet {
     size: string,
     energyLevel: string,
     environment: string,
+    company: Company,
   ): Pet {
     return new Pet(
       crypto.randomUUID(),
@@ -42,6 +48,7 @@ export default class Pet {
       size,
       energyLevel,
       environment,
+      company,
     )
   }
 
@@ -98,12 +105,22 @@ export default class Pet {
     this.#environment = value
   }
 
+  public getCompany(): Company {
+    return this.#company
+  }
+
   private validateName(name: string): void {
     if (!name || name.trim().length === 0) {
       throw new Error('Name cannot be empty')
     }
     if (name.length < 2) {
       throw new Error('Name must be at least 2 characters long')
+    }
+  }
+
+  private validateCompany(company: Company): void {
+    if (!company) {
+      throw new Error('Company cannot be empty')
     }
   }
 }
