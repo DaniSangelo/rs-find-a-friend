@@ -1,5 +1,6 @@
 import { FastifyInstance } from 'fastify'
 import { companyRoutes } from './Adapters/HTTP/Controllers/Company/Routes'
+import { petRoutes } from './Adapters/HTTP/Controllers/Pet/Routes'
 import { ZodError } from 'zod'
 import 'dotenv/config'
 
@@ -7,10 +8,14 @@ export function createApp(
   app: FastifyInstance,
   dependencies: {
     companyRegistrationController: ReturnType<typeof companyRoutes>
+    petRegistrationController: ReturnType<typeof petRoutes>
   },
 ) {
   app.register(companyRoutes(dependencies.companyRegistrationController), {
     prefix: 'company',
+  })
+  app.register(petRoutes(dependencies.petRegistrationController), {
+    prefix: 'pet',
   })
   app.setErrorHandler((error, _, reply) => {
     if (error instanceof ZodError) {
